@@ -18,6 +18,5 @@ package org.terasology.mobileBlocks.server;
 import org.terasology.entitySystem.event.Event;
 import org.terasology.module.sandbox.API;
 
-@API
 public class BeforeBlockMovesEvent implements Event {
 }
