@@ -1,0 +1,9 @@
+{
+    "id" : "MobileBlocks",
+    "version" : "0.1.0",
+    "author" : "Marcin Sciesinski<marcins78@gmail.com>",
+    "displayName" : "MobileBlocks",
+    "description" : "Allowing blocks to move",
+    "dependencies" : [],
+    "isServerSideOnly" : false
+}

@@ -1,0 +1,7 @@
+{
+    "hardness" : 1000,
+    "translucent": true,
+    "entity": {
+            "prefab": "MobileBlocks:MovingBlockReplacement"
+        }
+}
