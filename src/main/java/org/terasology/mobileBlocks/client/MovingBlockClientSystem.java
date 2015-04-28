@@ -21,6 +21,7 @@ import org.terasology.asset.Assets;
 import org.terasology.engine.Time;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
+import org.terasology.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
 import org.terasology.entitySystem.entity.lifecycleEvents.OnActivatedComponent;
 import org.terasology.entitySystem.event.ReceiveEvent;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
@@ -90,5 +91,12 @@ public class MovingBlockClientSystem extends BaseComponentSystem implements Upda
         meshComponent.color = Color.WHITE;
 
         entity.addComponent(meshComponent);
+    }
+
+    @ReceiveEvent
+    public void beforeMovingFinished(BeforeDeactivateComponent event, EntityRef entity, MovingBlockComponent movingBlock, LocationComponent locatinComponent) {
+        MeshComponent meshComponent = entity.getComponent(MeshComponent.class);
+        meshComponent.mesh.dispose();
+        entity.removeComponent(MeshComponent.class);
     }
 }
