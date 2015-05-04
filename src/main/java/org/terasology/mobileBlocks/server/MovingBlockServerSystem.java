@@ -24,6 +24,7 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.delay.DelayManager;
 import org.terasology.logic.delay.DelayedActionTriggeredEvent;
+import org.terasology.logic.health.BeforeDamagedEvent;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.math.Direction;
 import org.terasology.math.geom.Vector3i;
@@ -142,5 +143,22 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
                 endingEntity.send(new AfterBlockMovedEvent(true));
             }
         }
+    }
+
+    @ReceiveEvent
+    public void preventDestructionOfBlocksByOtherInstigators(PlaceBlocks placeBlocks, EntityRef world) {
+        if (placeBlocks.getInstigator() != world) {
+            for (Vector3i location : placeBlocks.getBlocks().keySet()) {
+                if (blockEntityRegistry.getBlockEntityAt(location).hasComponent(MovingBlockReplacementComponent.class)) {
+                    placeBlocks.consume();
+                    break;
+                }
+            }
+        }
+    }
+
+    @ReceiveEvent
+    public void preventDamagingOfBlocks(BeforeDamagedEvent event, EntityRef entity, MovingBlockReplacementComponent movingBlockReplacementComponent) {
+        event.consume();
     }
 }
