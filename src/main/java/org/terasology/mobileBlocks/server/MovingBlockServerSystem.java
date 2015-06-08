@@ -126,7 +126,7 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
             Vector3i locationTo = movingBlock.getLocationTo();
 
             Map<Vector3i, Block> blocksToPlace = new HashMap<>();
-            blocksToPlace.put(locationFrom, BlockManager.getAir());
+            blocksToPlace.put(locationFrom, blockManager.getBlock(BlockManager.AIR_ID));
             blocksToPlace.put(locationTo, movingBlock.getBlockToRender());
 
             movingBlockEntity.send(new BeforeBlockMovesEvent());

@@ -85,7 +85,7 @@ public class MovingBlockClientSystem extends BaseComponentSystem implements Upda
 
         MeshComponent meshComponent = new MeshComponent();
         meshComponent.mesh = mesh;
-        meshComponent.material = Assets.getMaterial("engine:terrain");
+        meshComponent.material = Assets.getMaterial("engine:terrain").get();
         meshComponent.translucent = false;
         meshComponent.hideFromOwner = false;
         meshComponent.color = Color.WHITE;
