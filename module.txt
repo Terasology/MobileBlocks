@@ -4,6 +4,11 @@
     "author" : "Marcin Sciesinski<marcins78@gmail.com>",
     "displayName" : "MobileBlocks",
     "description" : "Allowing blocks to move",
-    "dependencies" : [],
+    "dependencies" : [
+         {
+             "id" : "Core",
+             "minVersion" : "1.0.0"
+         }
+     ],
     "isServerSideOnly" : false
 }
