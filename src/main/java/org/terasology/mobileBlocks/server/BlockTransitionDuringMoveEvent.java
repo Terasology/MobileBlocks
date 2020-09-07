@@ -17,7 +17,6 @@ package org.terasology.mobileBlocks.server;
 
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.Event;
-import org.terasology.module.sandbox.API;
 
 public class BlockTransitionDuringMoveEvent implements Event {
     private boolean fromBlock;
