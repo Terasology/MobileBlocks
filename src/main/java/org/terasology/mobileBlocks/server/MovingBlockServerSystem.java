@@ -27,6 +27,7 @@ import org.terasology.logic.delay.DelayedActionTriggeredEvent;
 import org.terasology.logic.health.event.BeforeDamagedEvent;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.math.Direction;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.mobileBlocks.MovingBlockComponent;
 import org.terasology.registry.In;
@@ -90,9 +91,9 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
             movingEntity.addComponent(new MovingBlockComponent(block, location, moveLocation, gameTime, gameTime + moveTime));
             blockEntity.send(new BlockTransitionDuringMoveEvent(true, movingEntity));
 
-            Map<Vector3i, Block> blocksToPlace = new HashMap<>();
-            blocksToPlace.put(location, invisibleBlock);
-            blocksToPlace.put(moveLocation, invisibleBlock);
+            Map<org.joml.Vector3i, Block> blocksToPlace = new HashMap<>();
+            blocksToPlace.put(JomlUtil.from(location), invisibleBlock);
+            blocksToPlace.put(JomlUtil.from(moveLocation), invisibleBlock);
 
             PlaceBlocks placeInvisibleBlocks = new PlaceBlocks(blocksToPlace, worldProvider.getWorldEntity());
             try {
@@ -125,9 +126,9 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
             Vector3i locationFrom = movingBlock.getLocationFrom();
             Vector3i locationTo = movingBlock.getLocationTo();
 
-            Map<Vector3i, Block> blocksToPlace = new HashMap<>();
-            blocksToPlace.put(locationFrom, blockManager.getBlock(BlockManager.AIR_ID));
-            blocksToPlace.put(locationTo, movingBlock.getBlockToRender());
+            Map<org.joml.Vector3i, Block> blocksToPlace = new HashMap<>();
+            blocksToPlace.put(JomlUtil.from(locationFrom), blockManager.getBlock(BlockManager.AIR_ID));
+            blocksToPlace.put(JomlUtil.from(locationTo), movingBlock.getBlockToRender());
 
             movingBlockEntity.send(new BeforeBlockMovesEvent());
             EntityRef endingEntity = movingBlockEntity;
@@ -148,7 +149,7 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
     @ReceiveEvent
     public void preventDestructionOfBlocksByOtherInstigators(PlaceBlocks placeBlocks, EntityRef world) {
         if (placeBlocks.getInstigator() != world) {
-            for (Vector3i location : placeBlocks.getBlocks().keySet()) {
+            for (org.joml.Vector3i location : placeBlocks.getBlocks().keySet()) {
                 if (blockEntityRegistry.getBlockEntityAt(location).hasComponent(MovingBlockReplacementComponent.class)) {
                     placeBlocks.consume();
                     break;
