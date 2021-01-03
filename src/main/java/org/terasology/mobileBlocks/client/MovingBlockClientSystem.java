@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.mobileBlocks.client;
 
+import org.joml.Vector3f;
+import org.joml.Vector3i;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.utilities.Assets;
@@ -16,8 +18,6 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.logic.location.LocationComponent;
-import org.terasology.math.geom.Vector3f;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.mobileBlocks.MovingBlockComponent;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.mesh.Mesh;
@@ -48,9 +48,9 @@ public class MovingBlockClientSystem extends BaseComponentSystem implements Upda
 
             Vector3f result;
             if (gameTimeInMs <= timeStart) {
-                result = locationFrom.toVector3f();
+                result = new Vector3f(locationFrom);
             } else if (gameTimeInMs >= timeEnd) {
-                result = locationTo.toVector3f();
+                result = new Vector3f(locationTo);
             } else {
                 float resultDiff = 1f * (gameTimeInMs - timeStart) / (timeEnd - timeStart);
                 result = new Vector3f(
@@ -75,7 +75,7 @@ public class MovingBlockClientSystem extends BaseComponentSystem implements Upda
         meshComponent.material = Assets.getMaterial("engine:terrain").get();
         meshComponent.translucent = false;
         meshComponent.hideFromOwner = false;
-        meshComponent.color = Color.WHITE;
+        meshComponent.color = new Color(Color.white);
 
         entity.addComponent(meshComponent);
     }
