@@ -15,6 +15,9 @@
  */
 package org.terasology.mobileBlocks.server;
 
+import org.joml.Vector3f;
+import org.joml.Vector3i;
+import org.joml.Vector3ic;
 import org.terasology.engine.Time;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
@@ -28,7 +31,6 @@ import org.terasology.logic.health.event.BeforeDamagedEvent;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.math.Direction;
 import org.terasology.math.JomlUtil;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.mobileBlocks.MovingBlockComponent;
 import org.terasology.registry.In;
 import org.terasology.registry.Share;
@@ -60,11 +62,11 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
 
     @Override
     public boolean moveBlock(Vector3i location, Direction direction, long moveTime) {
-        Vector3i directionVector = direction.getVector3i();
+        Vector3ic directionVector = direction.asVector3i();
         Vector3i moveLocation = new Vector3i(
-                location.x + directionVector.x,
-                location.y + directionVector.y,
-                location.z + directionVector.z);
+                location.x + directionVector.x(),
+                location.y + directionVector.y(),
+                location.z + directionVector.z());
 
         Block blockAtLocation = worldProvider.getBlock(moveLocation);
         if (!blockAtLocation.isReplacementAllowed()) {
@@ -87,13 +89,13 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
         boolean success = false;
         EntityRef movingEntity = entityManager.create(prefab);
         try {
-            movingEntity.addComponent(new LocationComponent(location.toVector3f()));
+            movingEntity.addComponent(new LocationComponent(new Vector3f(location)));
             movingEntity.addComponent(new MovingBlockComponent(block, location, moveLocation, gameTime, gameTime + moveTime));
             blockEntity.send(new BlockTransitionDuringMoveEvent(true, movingEntity));
 
             Map<org.joml.Vector3i, Block> blocksToPlace = new HashMap<>();
-            blocksToPlace.put(JomlUtil.from(location), invisibleBlock);
-            blocksToPlace.put(JomlUtil.from(moveLocation), invisibleBlock);
+            blocksToPlace.put(location, invisibleBlock);
+            blocksToPlace.put(moveLocation, invisibleBlock);
 
             PlaceBlocks placeInvisibleBlocks = new PlaceBlocks(blocksToPlace, worldProvider.getWorldEntity());
             try {
@@ -127,8 +129,8 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
             Vector3i locationTo = movingBlock.getLocationTo();
 
             Map<org.joml.Vector3i, Block> blocksToPlace = new HashMap<>();
-            blocksToPlace.put(JomlUtil.from(locationFrom), blockManager.getBlock(BlockManager.AIR_ID));
-            blocksToPlace.put(JomlUtil.from(locationTo), movingBlock.getBlockToRender());
+            blocksToPlace.put(locationFrom, blockManager.getBlock(BlockManager.AIR_ID));
+            blocksToPlace.put(locationTo, movingBlock.getBlockToRender());
 
             movingBlockEntity.send(new BeforeBlockMovesEvent());
             EntityRef endingEntity = movingBlockEntity;

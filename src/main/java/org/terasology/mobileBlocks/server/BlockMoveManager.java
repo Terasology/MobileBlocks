@@ -15,9 +15,8 @@
  */
 package org.terasology.mobileBlocks.server;
 
+import org.joml.Vector3i;
 import org.terasology.math.Direction;
-import org.terasology.math.geom.Vector3i;
-import org.terasology.module.sandbox.API;
 
 public interface BlockMoveManager {
     boolean moveBlock(Vector3i location, Direction direction, long time);
