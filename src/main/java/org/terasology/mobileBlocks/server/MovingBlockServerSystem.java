@@ -151,7 +151,7 @@ public class MovingBlockServerSystem extends BaseComponentSystem implements Bloc
     @ReceiveEvent
     public void preventDestructionOfBlocksByOtherInstigators(PlaceBlocks placeBlocks, EntityRef world) {
         if (placeBlocks.getInstigator() != world) {
-            for (org.joml.Vector3i location : placeBlocks.getBlocks().keySet()) {
+            for (Vector3ic location : placeBlocks.getBlocks().keySet()) {
                 if (blockEntityRegistry.getBlockEntityAt(location).hasComponent(MovingBlockReplacementComponent.class)) {
                     placeBlocks.consume();
                     break;
