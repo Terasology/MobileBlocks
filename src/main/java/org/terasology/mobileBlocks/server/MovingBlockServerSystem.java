@@ -30,7 +30,6 @@ import org.terasology.logic.delay.DelayedActionTriggeredEvent;
 import org.terasology.logic.health.event.BeforeDamagedEvent;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.math.Direction;
-import org.terasology.math.JomlUtil;
 import org.terasology.mobileBlocks.MovingBlockComponent;
 import org.terasology.registry.In;
 import org.terasology.registry.Share;
