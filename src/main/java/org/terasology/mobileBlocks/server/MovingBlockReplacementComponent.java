@@ -15,7 +15,7 @@
  */
 package org.terasology.mobileBlocks.server;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 public class MovingBlockReplacementComponent implements Component {
 

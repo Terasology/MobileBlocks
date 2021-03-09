@@ -16,10 +16,10 @@
 package org.terasology.mobileBlocks;
 
 import org.joml.Vector3i;
-import org.terasology.entitySystem.Component;
-import org.terasology.network.Replicate;
-import org.terasology.world.block.Block;
-import org.terasology.world.block.ForceBlockActive;
+import org.terasology.engine.entitySystem.Component;
+import org.terasology.engine.network.Replicate;
+import org.terasology.engine.world.block.Block;
+import org.terasology.engine.world.block.ForceBlockActive;
 
 @Replicate
 @ForceBlockActive
