@@ -49,7 +49,7 @@ public class MovingBlockComponent implements Component<MovingBlockComponent> {
     }
 
     @Override
-    public void copy(MovingBlockComponent other) {
+    public void copyFrom(MovingBlockComponent other) {
         this.blockToRender = other.blockToRender;
         this.locationFrom = other.locationFrom;
         this.locationTo = other.locationTo;
