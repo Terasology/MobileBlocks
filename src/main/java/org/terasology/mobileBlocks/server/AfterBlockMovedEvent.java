@@ -15,7 +15,7 @@
  */
 package org.terasology.mobileBlocks.server;
 
-import org.terasology.engine.entitySystem.event.Event;
+import org.terasology.gestalt.entitysystem.event.Event;
 
 public class AfterBlockMovedEvent implements Event {
     private boolean success;
