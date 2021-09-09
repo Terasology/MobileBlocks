@@ -27,7 +27,6 @@ import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.logic.delay.DelayManager;
 import org.terasology.engine.logic.delay.DelayedActionTriggeredEvent;
-import org.terasology.module.health.events.BeforeDamagedEvent;
 import org.terasology.engine.logic.location.LocationComponent;
 import org.terasology.engine.math.Direction;
 import org.terasology.engine.registry.In;
@@ -38,6 +37,7 @@ import org.terasology.engine.world.block.Block;
 import org.terasology.engine.world.block.BlockManager;
 import org.terasology.engine.world.block.entity.placement.PlaceBlocks;
 import org.terasology.mobileBlocks.MovingBlockComponent;
+import org.terasology.module.health.events.BeforeDamagedEvent;
 
 import java.util.HashMap;
 import java.util.Map;
