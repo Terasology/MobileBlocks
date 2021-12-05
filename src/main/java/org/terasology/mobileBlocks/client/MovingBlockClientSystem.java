@@ -11,7 +11,6 @@ import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnActivatedComponent;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
@@ -22,6 +21,7 @@ import org.terasology.engine.rendering.assets.mesh.Mesh;
 import org.terasology.engine.rendering.logic.MeshComponent;
 import org.terasology.engine.utilities.Assets;
 import org.terasology.engine.world.block.Block;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 import org.terasology.mobileBlocks.MovingBlockComponent;
 import org.terasology.nui.Color;
 
