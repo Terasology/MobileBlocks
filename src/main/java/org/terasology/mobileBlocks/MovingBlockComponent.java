@@ -11,11 +11,11 @@ import org.terasology.gestalt.entitysystem.component.Component;
 @Replicate
 @ForceBlockActive
 public class MovingBlockComponent implements Component<MovingBlockComponent> {
-    private Block blockToRender;
-    private Vector3i locationFrom;
-    private Vector3i locationTo;
-    private long timeStart;
-    private long timeEnd;
+    public Block blockToRender;
+    public Vector3i locationFrom;
+    public Vector3i locationTo;
+    public long timeStart;
+    public long timeEnd;
 
     public MovingBlockComponent() {
     }
